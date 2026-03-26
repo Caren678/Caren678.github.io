@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /artworks/{artworkId} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.nickname is string
+        && request.resource.data.nickname.size() > 0
+        && request.resource.data.nickname.size() <= 30
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 40
+        && request.resource.data.action is string
+        && request.resource.data.action in ['fly', 'jump', 'run', 'spin', 'custom']
+        && request.resource.data.sentence is string
+        && request.resource.data.sentence.size() > 0
+        && request.resource.data.imageUrl is string
+        && request.resource.data.imageUrl.matches('https://.*');
+      allow update, delete: if false;
+    }
+  }
+}
