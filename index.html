@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The world of paper-cuts - a kid-friendly interactive gallery where paper-cut artworks can be uploaded, auto-cut out, and animated."
+    />
+    <title>The world of paper-cuts</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Interactive English Art Gallery</p>
+          <h1>The world of paper-cuts</h1>
+          <p class="subtitle">
+            Upload a paper-cut, remove the background automatically, and make it move.
+          </p>
+        </div>
+        <div class="mode-pill" id="modePill">Loading…</div>
+      </header>
+
+      <main class="layout">
+        <section class="panel gallery-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Paper-cut Gallery</h2>
+              <p>Everyone can see the artworks here.</p>
+            </div>
+            <button id="seedDemoBtn" class="ghost-btn" type="button">Add demo works</button>
+          </div>
+
+          <div id="statusBar" class="status-bar hidden"></div>
+          <div id="gallery" class="gallery"></div>
+          <div id="emptyState" class="empty-state hidden">
+            <div class="empty-emoji">✂️</div>
+            <h3>No paper-cuts yet</h3>
+            <p>Upload the first paper-cut on the right.</p>
+          </div>
+        </section>
+
+        <aside class="panel form-panel">
+          <h2>Upload your paper-cut</h2>
+          <p class="panel-tip">
+            Best result: photograph the paper-cut on a clean white or light background.
+          </p>
+
+          <form id="uploadForm" class="upload-form">
+            <label>
+              <span>Your name</span>
+              <input id="nameInput" type="text" maxlength="30" placeholder="Type your name" required />
+            </label>
+
+            <label>
+              <span>Title of your work</span>
+              <input id="titleInput" type="text" maxlength="40" placeholder="Give your work a title" required />
+            </label>
+
+            <label>
+              <span>Upload your picture</span>
+              <input id="fileInput" type="file" accept="image/*" required />
+            </label>
+
+            <div class="preview-wrap">
+              <p class="preview-title">Preview after auto cutout</p>
+              <div id="previewStage" class="preview-stage">
+                <span class="preview-hint">Your paper-cut preview will appear here.</span>
+              </div>
+            </div>
+
+            <div>
+              <span class="field-title">What can your paper-cut do?</span>
+              <div class="action-grid" id="actionGrid">
+                <button class="action-btn active" type="button" data-action="fly">fly</button>
+                <button class="action-btn" type="button" data-action="jump">jump</button>
+                <button class="action-btn" type="button" data-action="run">run</button>
+                <button class="action-btn" type="button" data-action="spin">spin</button>
+                <button class="action-btn" type="button" data-action="custom">my own action</button>
+              </div>
+            </div>
+
+            <label id="customActionWrap" class="hidden">
+              <span>My own action</span>
+              <input id="customActionInput" type="text" maxlength="50" placeholder="dance with the stars" />
+            </label>
+
+            <div class="sentence-box" id="sentenceBox">My paper-cut can fly.</div>
+
+            <button id="submitBtn" class="primary-btn" type="submit">Upload and make it move!</button>
+            <p class="tiny-note">
+              Public gallery setting: viewers can see artworks. In Firebase mode, data is shared across devices.
+            </p>
+          </form>
+        </aside>
+      </main>
+    </div>
+
+    <template id="cardTemplate">
+      <article class="art-card">
+        <div class="art-stage">
+          <img class="art-image" alt="paper-cut artwork" />
+        </div>
+        <div class="art-meta">
+          <div class="meta-top">
+            <h3 class="art-title"></h3>
+            <span class="art-action-tag"></span>
+          </div>
+          <p class="art-author"></p>
+          <p class="art-sentence"></p>
+          <button class="delete-btn" type="button">Delete</button>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
